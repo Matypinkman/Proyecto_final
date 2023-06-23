@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 type MainScreenProps = {
   navigation: any;
 };
 
 const MainScreen: React.FC<MainScreenProps> = ({ navigation }) => {
-  const [cameraVisible, setCameraVisible] = useState(false);
-  const { setOptions } = useNavigation();
-
   const handleVerMapa = () => {
     navigation.navigate('Mapa');
   };
@@ -18,18 +14,15 @@ const MainScreen: React.FC<MainScreenProps> = ({ navigation }) => {
     navigation.navigate('Cámara');
   };
 
-  useEffect(() => {
-    setOptions({
-      title: 'Menú Principal',
-      headerShown: true,
-      headerLeft: () => null, // Para ocultar la flecha de volver
-    });
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Button title="Ver Mapa" onPress={handleVerMapa} />
-      <Button title="Abrir Cámara" onPress={handleOpenCamera} />
+      <View style={styles.card}>
+        <Button title="Abrir Mapa" onPress={handleVerMapa} />
+      </View>
+      <View style={styles.card}>
+
+        <Button title="Abrir Cámara" onPress={handleOpenCamera} />
+      </View>
     </View>
   );
 };
@@ -40,6 +33,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  card: {
+    backgroundColor: '#F5F5F5',
+    borderRadius: 8,
+    padding: 20,
+    marginBottom: 20,
+    width: '80%',
+    textAlign:'center'
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
 });
 
