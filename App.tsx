@@ -1,18 +1,44 @@
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context'; // Agregado
 
-export default function App() {
+import LoginScreen from './views/LoginScreen';
+import MainScreen from './views/MainScreen';
+import MapScreen from './views/MapScreen';
+import CameraScreen from './views/CameraScreen';
+
+const Stack = createStackNavigator();
+
+const App: React.FC = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <SafeAreaProvider> 
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="MainScreen"
+            component={MainScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Mapa"
+            component={MapScreen}
+            options={{ headerShown: true }}
+          />
+          <Stack.Screen
+            name="Cámara"
+            component={CameraScreen}
+            options={{ headerShown: true }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider> 
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
